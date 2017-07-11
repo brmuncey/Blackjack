@@ -1,4 +1,4 @@
-#BLACKJACK
+BLACKJACK
 
 Description: Remake of classic card game blackjack or 21.
 Type: Game
