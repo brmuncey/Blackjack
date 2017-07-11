@@ -1,11 +1,13 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 class Deck {
 
     private List<Card> cards;
+    private List<Card> discard = new ArrayList<>();
 
     Deck(){ cards = new CardGenerator().getCards(); }
 
@@ -15,7 +17,7 @@ class Deck {
         for(int i = 0 ; i < cards.size(); i++ ){
             int random = getRandom();
             while(random == i){ getRandom(); }
-            swapCards(i,random);
+            swapCards( i , random );
         }
     }
 
@@ -30,7 +32,8 @@ class Deck {
     void printDeck(){
         System.out.println();
         for(Card c : cards)
-            if(c == null){ System.out.println("No card"); }
-            else { System.out.println(c.getCard()); }
+            System.out.println(c.getCard());
     }
+
+    private void addToDiscard(Card card){ discard.add(card); }
 }

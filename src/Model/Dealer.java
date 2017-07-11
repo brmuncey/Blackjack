@@ -9,12 +9,9 @@ class Dealer extends Player{
     }
 
     void initialDeal(Player player) {
-        int j = 0;
-        while ( j < 2){
+        for(int i =0 ; i < 2 ; i++)
             dealTo(player);
             dealTo(this);
-            j++;
-        }
     }
 
     private void dealTo(Player player ){ player.addCard(deck.getCards().remove(0)); }

@@ -15,5 +15,4 @@ class CardGenerator {
     }
 
     List<Card> getCards(){ return cards; }
-
 }
