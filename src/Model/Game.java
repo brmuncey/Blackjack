@@ -8,15 +8,14 @@ public class Game {
 
     public void setup() {
         deck = new Deck();
-        dealer = new Dealer();
-        new CardGenerator(deck);
         deck.shuffle();
         deck.printDeck();
+        dealer = new Dealer(deck);
         player = new Player("Brannon");
     }
 
     public void play(){
-        dealer.initialDeal(deck, player);
+        dealer.initialDeal(player);
         printHands();
     }
 

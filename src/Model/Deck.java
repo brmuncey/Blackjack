@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -8,7 +7,7 @@ class Deck {
 
     private List<Card> cards;
 
-    Deck(){ cards = new ArrayList<>(); }
+    Deck(){ cards = new CardGenerator().getCards(); }
 
     List<Card> getCards(){ return cards; }
 

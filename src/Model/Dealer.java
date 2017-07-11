@@ -2,20 +2,20 @@ package Model;
 
 class Dealer extends Player{
 
-    Dealer(){
+    private Deck deck;
+    Dealer(Deck deck){
         super("Dealer");
+        this.deck = deck;
     }
 
-    void initialDeal(Deck deck, Player player) {
+    void initialDeal(Player player) {
         int j = 0;
         while ( j < 2){
-            dealTo(player, deck);
-            dealTo(this,deck);
+            dealTo(player);
+            dealTo(this);
             j++;
         }
     }
 
-    private void dealTo(Player player, Deck deck){
-        player.addCard(deck.getCards().remove(0));
-    }
+    private void dealTo(Player player ){ player.addCard(deck.getCards().remove(0)); }
 }
