@@ -13,8 +13,6 @@ class Deck {
         shuffle();
     }
 
-    List<Card> getCards(){ return cards; }
-
     private void shuffle(){
         for(int i = 0 ; i < cards.size(); i++){
             int random = getRandom();
@@ -36,6 +34,8 @@ class Deck {
         for(Card c : cards)
             System.out.println(c.getCard());
     }
+
+    Card pop(){ return cards.remove(0); }
 
     //private void addToDiscard(Card card){ discard.add(card); }
 }

@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,6 +17,9 @@ public class Table extends Application{
 
     private GameController controller = new GameController();
     private Stage stage;
+    private HBox dealerBox;
+    private HBox playerBox;
+    private boolean started = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -59,38 +63,59 @@ public class Table extends Application{
     }
 
     private Scene buildGameScene() {
-        FlowPane pane = new FlowPane(addGameButtons());
-        pane.setAlignment(Pos.CENTER);
+        FlowPane pane = new FlowPane(buildNavMenu() , addGameButtons());
+        pane.setAlignment(Pos.BASELINE_CENTER);
         return new Scene(pane,400,400);
     }
 
     private HBox addGameButtons() {
         Button deal = new Button("Deal");
         deal.setOnAction(event -> displayHands() );
+
         return new HBox(deal);
     }
 
     private void displayHands(){
-        controller.start();
-
-        HBox dealer = new HBox();
-        for(Card c : controller.getDealer().getCards() ){
-            CardBuilder cb = new CardBuilder(c);
-            dealer.getChildren().add( cb.getCardImg() );
-
-            //dealer.getChildren().add(new Label(c.getCard()));
+        if(!started){
+            controller.start();
+            started = true;
         }
 
-        HBox player = new HBox();
-        for(Card c: controller.getPlayer().getCards() ){
-            CardBuilder cb = new CardBuilder(c);
-            player.getChildren().add( cb.getCardImg() );
+        dealerBox = new HBox();
+        playerBox = new HBox();
 
-            //player.getChildren().add(new Label(c.getCard()));
-        }
+        for(Card c : controller.getDealer().getHand().getCards() ){ dealerBox.getChildren().add( new CardBuilder(c).getCardImg() ); }
+        for(Card c: controller.getPlayer().getHand().getCards() ){ playerBox.getChildren().add( new CardBuilder(c).getCardImg() ); }
+        addTotals();
 
-        VBox vBox = new VBox(dealer,player);
-        stage.setScene(new Scene(vBox,400,400));
+        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),400,400));
         stage.show();
+    }
+
+    private void addTotals() {
+        String template = "Total: ";
+        playerBox.getChildren().add(new Label(template + controller.getPlayer().getHand().getTotal()));
+        dealerBox.getChildren().add(new Label( template + controller.getDealer().getHand().getTotal()));
+    }
+
+    private HBox buildNavMenu(){
+        Button back = new Button("Menu");
+        back.setOnAction(event -> buildApp());
+        return new HBox(back);
+    }
+
+    private HBox addActionButtons() {
+        Button hit = new Button("Hit");
+        Button stand = new Button("Stand");
+
+        hit.setOnAction(event -> distributeCard());
+        stand.setOnAction(event -> controller.stand());
+
+        return new HBox(hit,stand);
+    }
+
+    private void distributeCard() {
+        controller.hit();
+        displayHands();
     }
 }

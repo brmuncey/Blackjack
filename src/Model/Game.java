@@ -19,10 +19,10 @@ public class Game {
 
     private void printHands(){
         System.out.println(dealer.getName()+": ");
-        for(Card c : dealer.getCards()) System.out.println(c.getCard());
+        for(Card c : dealer.getHand().getCards()) System.out.println(c.getCard());
 
         System.out.println("\n"+player.getName()+": ");
-        for(Card c : player.getCards()) System.out.println(c.getCard());
+        for(Card c : player.getHand().getCards()) System.out.println(c.getCard());
     }
 
     public Player getPlayer() { return player; }

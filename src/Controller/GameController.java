@@ -26,4 +26,8 @@ public class GameController {
     public Player getPlayer() { return player; }
 
     public Dealer getDealer() { return dealer; }
+
+    public void stand() {}
+
+    public void hit() { player.addCard(dealer.deal()); }
 }

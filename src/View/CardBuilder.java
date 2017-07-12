@@ -42,9 +42,9 @@ class CardBuilder {
 
     VBox getCardImg(){
         FlowPane pane = new FlowPane(new Label(card.getCard()));
-        pane.setAlignment(Pos.CENTER);
         VBox vBox = new VBox(pane,setSuit());
         vBox.setAlignment(Pos.CENTER);
+        vBox.setMaxWidth(40);
         return vBox;
     }
 

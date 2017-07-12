@@ -15,5 +15,7 @@ public class Dealer extends Player{
         }
     }
 
-    private void dealTo(Player player){ player.addCard( deck.getCards().remove(0)); }
+    private void dealTo(Player player){ player.addCard( deck.pop()); }
+
+    public Card deal() { return deck.pop(); }
 }
