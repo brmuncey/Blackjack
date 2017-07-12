@@ -1,13 +1,12 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 class Deck {
 
     private List<Card> cards;
-    private List<Card> discard = new ArrayList<>();
+    //private List<Card> discard = new ArrayList<>();
 
     Deck(){
         cards = new CardGenerator().getCards();
