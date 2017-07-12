@@ -1,6 +1,6 @@
 package Model;
 
-class Dealer extends Player{
+public class Dealer extends Player{
 
     private Deck deck;
     Dealer(Deck deck){
@@ -9,10 +9,11 @@ class Dealer extends Player{
     }
 
     void initialDeal(Player player) {
-        for(int i =0 ; i < 2 ; i++)
+        for(int i = 0 ; i < 2 ; i++) {
             dealTo(player);
             dealTo(this);
+        }
     }
 
-    private void dealTo(Player player ){ player.addCard(deck.getCards().remove(0)); }
+    private void dealTo(Player player){ player.addCard( deck.getCards().remove(0)); }
 }

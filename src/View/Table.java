@@ -1,38 +1,46 @@
 package View;
 
 import Controller.GameController;
+import Model.Card;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Table extends Application{
 
     private GameController controller = new GameController();
-    private HBox buttonBox;
+    private Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("BRMUNCEY BLACKJACK");
-        primaryStage.setScene(buildMenu());
-        primaryStage.show();
+        stage = primaryStage;
+        stage.setResizable(false);
+        buildApp();
+    }
+
+    private void buildApp() {
+        stage.setTitle("BRMUNCEY BLACKJACK");
+        stage.setScene(buildMenu());
+        stage.show();
     }
 
     private Scene buildMenu() {
         FlowPane pane = new FlowPane();
         pane.setAlignment(Pos.BASELINE_CENTER);
-        setupButtons();
-        pane.getChildren().add(buttonBox);
+        pane.getChildren().add(addMenuButtons());
         return new Scene(pane,400,400);
     }
 
-    private void setupButtons(){
+    private HBox addMenuButtons(){
         Button start = new Button("Start");
-        start.setOnAction(event -> controller.start());
+        start.setOnAction(event -> transitionToGame());
 
         HBox startBox = new HBox(start);
         startBox.setPadding(new Insets(5 , 5, 5, 5));
@@ -43,6 +51,37 @@ public class Table extends Application{
         HBox exitBox = new HBox(exit);
         exitBox.setPadding(new Insets(5 , 5, 5, 5));
 
-        buttonBox = new HBox(startBox,exitBox);
+        return new HBox(startBox,exitBox);
+    }
+
+    private void transitionToGame(){
+        stage.setScene(buildGameScene());
+        stage.show();
+    }
+
+    private Scene buildGameScene() {
+        FlowPane pane = new FlowPane(addGameButtons());
+        pane.setAlignment(Pos.CENTER);
+        return new Scene(pane,400,400);
+    }
+
+    private HBox addGameButtons() {
+        Button deal = new Button("Deal");
+        deal.setOnAction(event -> displayHands() );
+        return new HBox(deal);
+    }
+
+    private void displayHands(){
+        controller.start();
+
+        HBox dealer = new HBox();
+        for(Card c : controller.getDealer().getCards() ){ dealer.getChildren().add(new Label(c.getCard())); }
+
+        HBox player = new HBox();
+        for(Card c: controller.getPlayer().getCards() ){ player.getChildren().add(new Label(c.getCard())); }
+
+        VBox vBox = new VBox(dealer,player);
+        stage.setScene(new Scene(vBox,400,400));
+        stage.show();
     }
 }

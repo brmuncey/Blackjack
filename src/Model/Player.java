@@ -3,19 +3,16 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
-class Player {
+public class Player {
 
     private String name;
-    private List<Card> cards;
+    private List<Card> cards = new ArrayList<>();
 
-    Player(String name){
-        this.name = name;
-        cards = new ArrayList<>();
-    }
+    Player(String name){ this.name = name; }
 
     String getName() { return name; }
 
-    List<Card> getCards() { return cards; }
+    public List<Card> getCards() { return cards; }
 
     void addCard(Card card) { cards.add(card); }
 }

@@ -2,13 +2,11 @@ package Model;
 
 public class Game {
 
-    private Deck deck;
     private Player player;
     private Dealer dealer;
 
     public void setup() {
-        deck = new Deck();
-        deck.shuffle();
+        Deck deck = new Deck();
         deck.printDeck();
         dealer = new Dealer(deck);
         player = new Player("Brannon");
@@ -26,4 +24,8 @@ public class Game {
         System.out.println("\n"+player.getName()+": ");
         for(Card c : player.getCards()) System.out.println(c.getCard());
     }
+
+    public Player getPlayer() { return player; }
+
+    public Dealer getDealer() { return dealer; }
 }

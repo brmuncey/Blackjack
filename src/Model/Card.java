@@ -1,6 +1,6 @@
 package Model;
 
-class Card {
+public class Card {
 
     private int value;
     private Suit suit;
@@ -13,7 +13,7 @@ class Card {
 
     private Suit getSuit() { return suit; }
 
-    String getCard(){
+    public String getCard(){
         String value;
 
         if(getValue() == 1){ value = "A"; }
