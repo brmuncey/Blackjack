@@ -3,6 +3,7 @@ package Model;
 public class Dealer extends Player{
 
     private Deck deck;
+
     Dealer(Deck deck){
         super("Dealer");
         this.deck = deck;
