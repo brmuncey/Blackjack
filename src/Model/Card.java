@@ -4,6 +4,7 @@ public class Card {
 
     private int value;
     private Suit suit;
+
     Card(int value, Suit suit){
         this.value = value;
         this.suit = suit;
@@ -11,7 +12,7 @@ public class Card {
 
     private int getValue() { return value; }
 
-    private Suit getSuit() { return suit; }
+    public Suit getSuit() { return suit; }
 
     public String getCard(){
         String value;
@@ -22,10 +23,8 @@ public class Card {
         else if(getValue() == 13){ value = "K"; }
         else { value = Integer.toString(getValue()); }
 
-        return getSuit() + " / " + value;
+        return value;
     }
 
-    public enum Suit {
-        SPADES , DIAMONDS , CLUBS , HEARTS
-    }
+    public enum Suit { SPADES , DIAMONDS , CLUBS , HEARTS }
 }

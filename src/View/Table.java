@@ -7,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -75,10 +74,20 @@ public class Table extends Application{
         controller.start();
 
         HBox dealer = new HBox();
-        for(Card c : controller.getDealer().getCards() ){ dealer.getChildren().add(new Label(c.getCard())); }
+        for(Card c : controller.getDealer().getCards() ){
+            CardBuilder cb = new CardBuilder(c);
+            dealer.getChildren().add( cb.getCardImg() );
+
+            //dealer.getChildren().add(new Label(c.getCard()));
+        }
 
         HBox player = new HBox();
-        for(Card c: controller.getPlayer().getCards() ){ player.getChildren().add(new Label(c.getCard())); }
+        for(Card c: controller.getPlayer().getCards() ){
+            CardBuilder cb = new CardBuilder(c);
+            player.getChildren().add( cb.getCardImg() );
+
+            //player.getChildren().add(new Label(c.getCard()));
+        }
 
         VBox vBox = new VBox(dealer,player);
         stage.setScene(new Scene(vBox,400,400));
