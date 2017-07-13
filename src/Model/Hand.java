@@ -14,19 +14,19 @@ public class Hand {
         return cards;
     }
 
-    public String getTotal(){
+    public int getTotal(){
         int total = 0;
         for(Card c : cards ){
-            if(c.getCard().equals("A")){
-                if(total + 11 > 21){ total += 11; }
-                else { total++; }
+            if(c.getCard().equals("A") && total <= 11){
+                total += 11;
             } else { total += c.getValue(); }
         }
 
-        if(total <= 21) { return Integer.toString(total); }
-        return "Busted";
+        return total;
     }
 
-    public String getFirstDealTotal(){ return Integer.toString(cards.get(1).getValue()); }
+    public int getFirstDealTotal(){ return cards.get(1).getValue(); }
+
+
 
 }

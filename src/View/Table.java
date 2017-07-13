@@ -20,6 +20,7 @@ public class Table extends Application{
     private HBox dealerBox;
     private HBox playerBox;
     private boolean started = false;
+    private String template = "Total: ";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -90,6 +91,19 @@ public class Table extends Application{
         stage.show();
     }
 
+    private void displayFinalHands(){
+        addDealerFinalCards();
+        addPlayerCards();
+        addEndTotals();
+        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),400,400));
+        stage.show();
+    }
+
+    private void addDealerFinalCards() {
+        dealerBox = new HBox();
+        for(Card c: controller.getDealer().getHand().getCards() ) { dealerBox.getChildren().add( new CardBuilder(c).getCardImg() ); }
+    }
+
     private void addPlayerCards() {
         playerBox = new HBox();
         for(Card c: controller.getPlayer().getHand().getCards() ){ playerBox.getChildren().add( new CardBuilder(c).getCardImg() ); }
@@ -105,9 +119,13 @@ public class Table extends Application{
     }
 
     private void addTotals() {
-        String template = "Total: ";
         playerBox.getChildren().add(new Label(template + controller.getPlayer().getHand().getTotal()));
         dealerBox.getChildren().add(new Label( template + controller.getDealer().getHand().getFirstDealTotal()));
+    }
+
+    private void addEndTotals(){
+        playerBox.getChildren().add(new Label(template + controller.getPlayer().getHand().getTotal()));
+        dealerBox.getChildren().add(new Label( template + controller.getDealer().getHand().getTotal()));
     }
 
     private HBox buildNavMenu(){
@@ -120,13 +138,18 @@ public class Table extends Application{
         Button hit = new Button("Hit");
         Button stand = new Button("Stand");
 
-        hit.setOnAction(event -> distributeCard());
-        stand.setOnAction(event -> controller.stand());
+        hit.setOnAction(event -> takePlayerTurn());
+        stand.setOnAction(event -> takeDealerTurn());
 
         return new HBox(hit,stand);
     }
 
-    private void distributeCard() {
+    private void takeDealerTurn() {
+        controller.stand();
+        displayFinalHands();
+    }
+
+    private void takePlayerTurn() {
         controller.hit();
         displayHands();
     }
