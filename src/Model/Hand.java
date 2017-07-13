@@ -26,4 +26,7 @@ public class Hand {
         if(total <= 21) { return Integer.toString(total); }
         return "Busted";
     }
+
+    public String getFirstDealTotal(){ return Integer.toString(cards.get(1).getValue()); }
+
 }

@@ -81,21 +81,33 @@ public class Table extends Application{
             started = true;
         }
 
-        dealerBox = new HBox();
-        playerBox = new HBox();
+        addDealerCards();
+        addPlayerCards();
 
-        for(Card c : controller.getDealer().getHand().getCards() ){ dealerBox.getChildren().add( new CardBuilder(c).getCardImg() ); }
-        for(Card c: controller.getPlayer().getHand().getCards() ){ playerBox.getChildren().add( new CardBuilder(c).getCardImg() ); }
         addTotals();
 
         stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),400,400));
         stage.show();
     }
 
+    private void addPlayerCards() {
+        playerBox = new HBox();
+        for(Card c: controller.getPlayer().getHand().getCards() ){ playerBox.getChildren().add( new CardBuilder(c).getCardImg() ); }
+    }
+
+    private void addDealerCards() {
+        dealerBox = new HBox();
+        for(int i = 0; i < controller.getDealer().getHand().getCards().size() ; i++) {
+            Card c = controller.getDealer().getHand().getCards().get(i);
+            if(i == 0){ dealerBox.getChildren().add( new CardBuilder(c).getBackImg() ); }
+            else { dealerBox.getChildren().add( new CardBuilder(c).getCardImg() ); }
+        }
+    }
+
     private void addTotals() {
         String template = "Total: ";
         playerBox.getChildren().add(new Label(template + controller.getPlayer().getHand().getTotal()));
-        dealerBox.getChildren().add(new Label( template + controller.getDealer().getHand().getTotal()));
+        dealerBox.getChildren().add(new Label( template + controller.getDealer().getHand().getFirstDealTotal()));
     }
 
     private HBox buildNavMenu(){

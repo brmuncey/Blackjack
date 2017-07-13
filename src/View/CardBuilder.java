@@ -48,4 +48,10 @@ class CardBuilder {
         return vBox;
     }
 
+    ImageView getBackImg() {
+        ImageView iv = new ImageView(new Image("/Img/CardBack.png"));
+        iv.setFitHeight(40);
+        iv.setFitWidth(40);
+        return iv;
+    }
 }
