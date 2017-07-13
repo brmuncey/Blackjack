@@ -33,11 +33,16 @@ public class GameController {
 
     public boolean checkForBust(int total) { return total < 22; }
 
-    public void endRound() { dealer.retrieveCards(player.discard() , dealer.discard()); }
+    public void endRound() {
+        dealer.retrieveCards(player.discard() , dealer.discard());
+        reset();
+    }
 
     public String getWinner(){
         if( player.getHand().getTotal() > dealer.getHand().getTotal() ) { return player.getName(); }
         else if( player.getHand().getTotal() == dealer.getHand().getTotal() ) { return "Push"; }
         else return dealer.getName();
     }
+
+    private void reset(){ game.play(); }
 }
