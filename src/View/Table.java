@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -48,16 +49,18 @@ public class Table extends Application{
         start.setOnAction(event -> transitionToGame());
 
         HBox startBox = new HBox(start);
-        startBox.setPadding(new Insets(5 , 5, 5, 5));
+        paddingMaster(startBox);
 
         Button exit = new Button("Exit");
         exit.setOnAction(event -> controller.exit());
 
         HBox exitBox = new HBox(exit);
-        exitBox.setPadding(new Insets(5 , 5, 5, 5));
+        paddingMaster(exitBox);
 
         return new HBox(startBox,exitBox);
     }
+
+    private void paddingMaster(Pane pane){ pane.setPadding(new Insets(5 , 5, 5, 5)); }
 
     private void transitionToGame(){
         stage.setScene(buildGameScene());
@@ -73,8 +76,9 @@ public class Table extends Application{
     private HBox addGameButtons() {
         Button deal = new Button("Deal");
         deal.setOnAction(event -> displayHands() );
-
-        return new HBox(deal);
+        HBox temp = new HBox(deal);
+        paddingMaster(temp);
+        return temp;
     }
 
     private void displayHands(){
@@ -132,7 +136,9 @@ public class Table extends Application{
     private HBox buildNavMenu(){
         Button back = new Button("Menu");
         back.setOnAction(event -> buildApp());
-        return new HBox(back);
+        HBox temp = new HBox(back);
+        paddingMaster(temp);
+        return temp;
     }
 
     private HBox addActionButtons() {
@@ -142,7 +148,10 @@ public class Table extends Application{
         hit.setOnAction(event -> takePlayerTurn());
         stand.setOnAction(event -> takeDealerTurn());
 
-        return new HBox(hit,stand);
+        HBox temp = new HBox(hit,stand);
+        paddingMaster(temp);
+
+        return temp;
     }
 
     private void takeDealerTurn() {
