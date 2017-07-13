@@ -6,4 +6,4 @@ Players: 1
 
 Creator: github.com/brmuncey
 Start Date: July 10,  2017
-End Date: TBD
+End Date: Projected Completion Data July 15th.
