@@ -17,11 +17,9 @@ public class Hand {
     public int getTotal(){
         int total = 0;
         for(Card c : cards ){
-            if(c.getCard().equals("A") && total <= 11){
-                total += 11;
-            } else { total += c.getValue(); }
+            if(c.getCard().equals("A") && total <= 11){ total += 11; }
+            else { total += c.getValue(); }
         }
-
         return total;
     }
 

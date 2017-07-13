@@ -21,6 +21,7 @@ public class Table extends Application{
     private HBox playerBox;
     private boolean started = false;
     private String template = "Total: ";
+    private int windowSize = 400;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -30,7 +31,7 @@ public class Table extends Application{
     }
 
     private void buildApp() {
-        stage.setTitle("BRMUNCEY BLACKJACK");
+        stage.setTitle("BLACKJACK");
         stage.setScene(buildMenu());
         stage.show();
     }
@@ -39,7 +40,7 @@ public class Table extends Application{
         FlowPane pane = new FlowPane();
         pane.setAlignment(Pos.BASELINE_CENTER);
         pane.getChildren().add(addMenuButtons());
-        return new Scene(pane,400,400);
+        return new Scene(pane,windowSize,windowSize);
     }
 
     private HBox addMenuButtons(){
@@ -66,7 +67,7 @@ public class Table extends Application{
     private Scene buildGameScene() {
         FlowPane pane = new FlowPane(buildNavMenu() , addGameButtons());
         pane.setAlignment(Pos.BASELINE_CENTER);
-        return new Scene(pane,400,400);
+        return new Scene(pane,windowSize,windowSize);
     }
 
     private HBox addGameButtons() {
@@ -87,7 +88,7 @@ public class Table extends Application{
 
         addTotals();
 
-        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),400,400));
+        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),windowSize,windowSize));
         stage.show();
     }
 
@@ -95,7 +96,7 @@ public class Table extends Application{
         addDealerFinalCards();
         addPlayerCards();
         addEndTotals();
-        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),400,400));
+        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),windowSize,windowSize));
         stage.show();
     }
 
