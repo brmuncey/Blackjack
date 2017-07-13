@@ -63,11 +63,11 @@ public class Table extends Application{
     private void paddingMaster(Pane pane){ pane.setPadding(new Insets(5 , 5, 5, 5)); }
 
     private void transitionToGame(){
-        stage.setScene(buildGameScene());
+        stage.setScene(buildGameSceneRoot());
         stage.show();
     }
 
-    private Scene buildGameScene() {
+    private Scene buildGameSceneRoot() {
         FlowPane pane = new FlowPane(buildNavMenu() , addGameButtons());
         pane.setAlignment(Pos.BASELINE_CENTER);
         return new Scene(pane,windowSize,windowSize);
@@ -75,13 +75,13 @@ public class Table extends Application{
 
     private HBox addGameButtons() {
         Button deal = new Button("Deal");
-        deal.setOnAction(event -> displayHands() );
+        deal.setOnAction(event -> getHandsFromController() );
         HBox temp = new HBox(deal);
         paddingMaster(temp);
         return temp;
     }
 
-    private void displayHands(){
+    private void getHandsFromController(){
         if(!started){
             controller.start();
             started = true;
@@ -89,10 +89,12 @@ public class Table extends Application{
 
         addDealerCards();
         addPlayerCards();
-
         addTotals();
+        showHands();
+    }
 
-        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),windowSize,windowSize));
+    private void showHands() {
+        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, buildGameButtons()),windowSize,windowSize));
         stage.show();
     }
 
@@ -100,8 +102,7 @@ public class Table extends Application{
         addDealerFinalCards();
         addPlayerCards();
         addEndTotals();
-        stage.setScene(new Scene(new VBox(buildNavMenu(), dealerBox, playerBox, addActionButtons()),windowSize,windowSize));
-        stage.show();
+        showHands();
     }
 
     private void addDealerFinalCards() {
@@ -149,6 +150,7 @@ public class Table extends Application{
         stand.setOnAction(event -> takeDealerTurn());
 
         HBox temp = new HBox(hit,stand);
+        temp.setAlignment(Pos.CENTER);
         paddingMaster(temp);
 
         return temp;
@@ -161,7 +163,17 @@ public class Table extends Application{
 
     private void takePlayerTurn() {
         controller.hit();
-        displayHands();
-        if(!controller.checkForBust(controller.getPlayer().getHand().getTotal())) { controller.endRound();}
+        getHandsFromController();
+        if(!controller.checkForBust(controller.getPlayer().getHand().getTotal())) {
+            controller.endRound();
+        }
     }
+
+    private VBox buildGameButtons(){
+        HBox hBox = addActionButtons();
+        VBox vBox = new VBox(hBox);
+        vBox.setAlignment(Pos.BOTTOM_CENTER);
+        return vBox;
+    }
+
 }

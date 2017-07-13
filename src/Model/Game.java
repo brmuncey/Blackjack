@@ -7,7 +7,7 @@ public class Game {
 
     public void setup() {
         Deck deck = new Deck();
-        deck.printDeck();
+        //deck.printDeck();
         dealer = new Dealer(deck);
         player = new Player("Brannon");
     }

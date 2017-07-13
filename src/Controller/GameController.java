@@ -31,12 +31,13 @@ public class GameController {
 
     public void hit() { player.addCard(dealer.deal()); }
 
-    public boolean checkForBust(int total) {
-        return total < 22;
-    }
+    public boolean checkForBust(int total) { return total < 22; }
 
-    public void endRound() {
-        dealer.retrieveCards(player.discard() , dealer.discard());
+    public void endRound() { dealer.retrieveCards(player.discard() , dealer.discard()); }
 
+    public Player getWinner(){
+        if( player.getHand().getTotal() > dealer.getHand().getTotal() ) { return player; }
+        else if( player.getHand().getTotal() == dealer.getHand().getTotal() ) { return null; }
+        else return dealer;
     }
 }

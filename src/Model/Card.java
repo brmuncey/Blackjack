@@ -6,7 +6,7 @@ public class Card {
     private Suit suit;
 
     Card(int value, Suit suit){
-        if(value == 11 || value == 12 || value == 13){ this.value = 10; }
+        if(value == 11 || value == 12 || value == 13) { this.value = 10; }
         else { this.value = value; }
         this.suit = suit;
     }

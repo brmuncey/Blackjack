@@ -38,9 +38,6 @@ public class Dealer extends Player{
     }
 
     private void checkForReshuffle() {
-        if(deck.getCards().size() <= 10){
-            deck.insert(discard);
-        }
-
+        if(deck.getCards().size() <= 10){ deck.insert(discard); }
     }
 }

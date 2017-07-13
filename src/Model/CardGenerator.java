@@ -10,8 +10,7 @@ class CardGenerator {
     CardGenerator(){ generate(); }
 
     private void generate() {
-        for(Card.Suit suit : Card.Suit.values())
-            for (int j = 1; j < 14; j++) { cards.add(new Card(j , suit)); }
+        for(Card.Suit suit : Card.Suit.values()) { for (int j = 1; j < 14; j++) { cards.add(new Card(j, suit)); } }
     }
 
     List<Card> getCards(){ return cards; }
