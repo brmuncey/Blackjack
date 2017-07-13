@@ -35,9 +35,9 @@ public class GameController {
 
     public void endRound() { dealer.retrieveCards(player.discard() , dealer.discard()); }
 
-    public Player getWinner(){
-        if( player.getHand().getTotal() > dealer.getHand().getTotal() ) { return player; }
-        else if( player.getHand().getTotal() == dealer.getHand().getTotal() ) { return null; }
-        else return dealer;
+    public String getWinner(){
+        if( player.getHand().getTotal() > dealer.getHand().getTotal() ) { return player.getName(); }
+        else if( player.getHand().getTotal() == dealer.getHand().getTotal() ) { return "Push"; }
+        else return dealer.getName();
     }
 }

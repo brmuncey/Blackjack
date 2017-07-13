@@ -15,7 +15,6 @@ class Deck {
     private void shuffle(){
         for(int i = 0 ; i < cards.size(); i++){
             int random = getRandom();
-            while(random == i){ getRandom(); }
             swapCards( i , random );
         }
     }
@@ -28,11 +27,10 @@ class Deck {
 
     private int getRandom() { return ThreadLocalRandom.current().nextInt(0,  52); }
 
-    void printDeck(){
+    /*void printDeck(){
         System.out.println();
-        for(Card c : cards)
-            System.out.println(c.getCard());
-    }
+        for(Card c : cards) { System.out.println(c.getCard()); }
+    }*/
 
     Card pop(){ return cards.remove(0); }
 

@@ -9,7 +9,7 @@ public class Game {
         Deck deck = new Deck();
         //deck.printDeck();
         dealer = new Dealer(deck);
-        player = new Player("Brannon");
+        player = new Player("Player");
     }
 
     public void play(){

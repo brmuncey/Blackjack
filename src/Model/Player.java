@@ -12,7 +12,7 @@ public class Player {
         hand = new Hand();
     }
 
-    String getName() { return name; }
+    public String getName() { return name; }
 
     public void addCard(Card card) { hand.add(card); }
 

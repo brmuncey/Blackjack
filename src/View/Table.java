@@ -159,6 +159,9 @@ public class Table extends Application{
     private void takeDealerTurn() {
         controller.stand();
         displayFinalHands();
+        controller.endRound();
+
+        System.out.println(controller.getWinner());
     }
 
     private void takePlayerTurn() {
