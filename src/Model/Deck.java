@@ -6,7 +6,6 @@ import java.util.concurrent.ThreadLocalRandom;
 class Deck {
 
     private List<Card> cards;
-    //private List<Card> discard = new ArrayList<>();
 
     Deck(){
         cards = new CardGenerator().getCards();
@@ -37,5 +36,10 @@ class Deck {
 
     Card pop(){ return cards.remove(0); }
 
-    //private void addToDiscard(Card card){ discard.add(card); }
+    List<Card> getCards() { return cards; }
+
+    void insert(List<Card> discard) {
+        cards.addAll(discard);
+        shuffle();
+    }
 }

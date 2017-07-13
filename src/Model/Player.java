@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 public class Player {
 
     private String name;
@@ -15,4 +17,6 @@ public class Player {
     public void addCard(Card card) { hand.add(card); }
 
     public Hand getHand() { return hand; }
+
+    public List<Card> discard() { return hand.emptyHand(); }
 }

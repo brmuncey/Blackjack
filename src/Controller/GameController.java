@@ -27,12 +27,16 @@ public class GameController {
 
     public Dealer getDealer() { return dealer; }
 
-    public void stand() {
-        while (dealer.getHand().getTotal() < 17) {
-            dealer.addCard(dealer.deal());
-            if(dealer.getHand().getTotal() <= 21 || dealer.getHand().getTotal() > 17) { break; }
-        }
-    }
+    public void stand() { dealer.takeTurn(); }
 
     public void hit() { player.addCard(dealer.deal()); }
+
+    public boolean checkForBust(int total) {
+        return total < 22;
+    }
+
+    public void endRound() {
+        dealer.retrieveCards(player.discard() , dealer.discard());
+
+    }
 }

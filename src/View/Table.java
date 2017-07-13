@@ -162,5 +162,6 @@ public class Table extends Application{
     private void takePlayerTurn() {
         controller.hit();
         displayHands();
+        if(!controller.checkForBust(controller.getPlayer().getHand().getTotal())) { controller.endRound();}
     }
 }
